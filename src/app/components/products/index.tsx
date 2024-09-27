@@ -1,9 +1,7 @@
 "use client";
 
 import { productData } from "@/productData";
-import { fonts } from "@/styles/fonts/fonts";
-import { colors } from "@/styles/tokens/colors";
-import { Box, Typography, ButtonBase, styled, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { ProductCard } from "./productCard";
 
 export const Products: React.FC = () => {
@@ -11,7 +9,7 @@ export const Products: React.FC = () => {
     <Box
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Typography sx={fonts.h11} color={colors.textNavy}>
+      <Typography variant="h2" color="primary.dark">
         Our Products
       </Typography>
       <Box
@@ -32,15 +30,15 @@ export const Products: React.FC = () => {
       <Button
         variant="outlined"
         sx={{
-          color: colors.textOrange,
-          borderColor: colors.textOrange,
-          backgroundColor: "white",
+          color: "warning.main",
+          borderColor: "warning.main",
+          backgroundColor: "secondary.main",
           "&:hover": {
-            backgroundColor: colors.textOrange,
-            color: "white",
-            borderColor: colors.textOrange,
+            backgroundColor: "warning.main",
+            color: "secondary.main",
+            borderColor: "warning.main",
           },
-          ...fonts.h4,
+          borderRadius: 0,
           width: "245px",
         }}
       >

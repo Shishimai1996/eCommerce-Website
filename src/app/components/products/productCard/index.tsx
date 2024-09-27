@@ -1,8 +1,9 @@
 "use client";
 
 import { TProduct } from "@/productData";
-import { fonts } from "@/styles/fonts/fonts";
-import { colors } from "@/styles/tokens/colors";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShareIcon from "@mui/icons-material/Share";
+import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import {
   Badge,
   Box,
@@ -12,9 +13,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import ShareIcon from "@mui/icons-material/Share";
-import SyncAltIcon from "@mui/icons-material/SyncAlt";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 interface BadComponentProps {
   badgeContent: string | null;
@@ -33,7 +31,7 @@ const BadgeComponent: React.FC<BadComponentProps> = ({
     sx={{
       "& .MuiBadge-badge": {
         backgroundColor: badgeColor,
-        color: colors.backgroundWhite,
+        color: "secondary.main",
         fontSize: "16px",
         padding: "5px",
         borderRadius: "50%",
@@ -53,7 +51,16 @@ interface ActionButtonProps {
   label: string;
 }
 const ActionButton: React.FC<ActionButtonProps> = ({ icon: Icon, label }) => (
-  <Button sx={{ color: colors.backgroundWhite, ...fonts.h4 }}>
+  <Button
+    sx={{
+      bgcolor: "transparent",
+      "&:hover": {
+        backgroundColor: "transparent",
+        color: "secondary.main",
+        borderColor: "transparent",
+      },
+    }}
+  >
     <Icon />
     {label}
   </Button>
@@ -63,10 +70,10 @@ export const ProductCard: React.FC<{ product: TProduct }> = ({ product }) => {
   const badge = product.discount
     ? {
         badgeContent: `${-product.discount * 100}%`,
-        badgeColor: colors.discountBadge,
+        badgeColor: "error.main",
       }
     : product.new
-    ? { badgeContent: "New", badgeColor: colors.newBadge }
+    ? { badgeContent: "New", badgeColor: "success.main" }
     : null;
 
   return (
@@ -119,34 +126,39 @@ export const ProductCard: React.FC<{ product: TProduct }> = ({ product }) => {
           opacity: 0,
           transition: "opacity 0.3s ease",
           bgcolor: "rgba(0, 0, 0, 0.5)",
+          zIndex: 2,
         }}
       >
         <Button
           variant="contained"
           sx={{
             width: "202px",
-            ...fonts.h4,
-            bgcolor: colors.backgroundWhite,
-            color: colors.textOrange,
-            "&:hover": {
-              bgcolor: colors.cardBackground,
-            },
+
+            bgcolor: "secondary.main",
+            color: "warning.main",
+            borderRadius: 0,
           }}
         >
           Add to cart
         </Button>
-        <Box sx={{ display: "flex", flexDirection: "row", m: "5%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            m: "5%",
+          }}
+        >
           <ActionButton icon={ShareIcon} label="Share" />
           <ActionButton icon={SyncAltIcon} label="Compare" />
           <ActionButton icon={FavoriteBorderIcon} label="Like" />
         </Box>
       </Box>
 
-      <CardContent sx={{ bgcolor: colors.productCard }}>
-        <Typography gutterBottom sx={fonts.h10}>
+      <CardContent sx={{ bgcolor: "success.light" }}>
+        <Typography gutterBottom variant="h6">
           {product.title}
         </Typography>
-        <Typography sx={{ color: "text.secondary", ...fonts.h6 }}>
+        <Typography sx={{ color: "text.secondary" }} variant="h9">
           {product.description}
         </Typography>
         <Box
@@ -157,15 +169,16 @@ export const ProductCard: React.FC<{ product: TProduct }> = ({ product }) => {
             alignItems: "center",
           }}
         >
-          <Typography sx={{ color: "text.secondary", ...fonts.h10 }}>
+          <Typography sx={{ color: "text.secondary" }} variant="h6">
             Rp {product.price}
           </Typography>
           {product.discount ? (
             <Typography
+              variant="body2"
+              color="warning.dark"
               sx={{
-                color: colors.originaLPrice,
                 textDecoration: "line-through",
-                ...fonts.body1,
+
                 fontSize: "20px",
               }}
             >

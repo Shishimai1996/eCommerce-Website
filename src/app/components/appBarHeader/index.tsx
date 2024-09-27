@@ -55,17 +55,13 @@ const Title: React.FC<{ isMobile: boolean }> = ({ isMobile }) => (
   <>
     <Image width={30} height={30} alt="logomark" src={houseLogo} />
     <Typography
-      variant={isMobile ? "h5" : "h6"}
+      variant={isMobile ? "h4" : "h3"}
       noWrap
       sx={{
         mx: 1.5,
         display: "flex",
         flexGrow: isMobile ? 1 : 0,
         color: "#000000",
-        fontFamily: fonts.h1.fontFamily,
-        fontSize: fonts.h1.fontSize,
-        fontWeight: fonts.h1.fontWeight,
-        lineHeight: fonts.h1.lineHeight,
       }}
     >
       Furniro

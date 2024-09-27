@@ -1,20 +1,9 @@
+import { Box } from "@mui/material";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { AppBarHeader } from "./components/appBarHeader";
 import { Footer } from "./components/footer";
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   // src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+import "./globals.css";
+import ThemeWrapper from "./themeWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,23 +15,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: "Poppins",
-    },
-    overrides: {
-      MuiCssBaseline: {
-        "@global": {
-          "@font-face": [yellowtail],
-        },
-      },
-    },
-  });
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <ThemeWrapper>
           <Box>
             <AppBarHeader />
             <Box component="main" sx={{ flexGrow: 0, mt: 8 }}>
@@ -50,7 +26,7 @@ export default function RootLayout({
             </Box>
             <Footer />
           </Box>
-        </ThemeProvider>
+        </ThemeWrapper>
       </body>
     </html>
   );

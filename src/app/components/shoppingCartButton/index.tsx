@@ -12,6 +12,7 @@ export const ShoppingCartButton: React.FC = () => {
   };
   return (
     <Button
+      sx={{ bgcolor: "secondary.main" }}
       variant="text"
       onClick={() => {
         handleOpenCart();
