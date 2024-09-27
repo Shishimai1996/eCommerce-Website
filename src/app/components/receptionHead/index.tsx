@@ -10,12 +10,19 @@ export const ReceptionHead: React.FC = () => {
     <Box
       sx={{ position: "relative", width: "100%", top: 0, left: 0, zIndex: 0 }}
     >
-      <Image
-        src={banner}
-        alt={"banner"}
-        style={{ width: "100%", height: "auto" }}
-      />
-
+      <Box
+        sx={{
+          [theme.breakpoints.down("md")]: {
+            width: "110%",
+          },
+        }}
+      >
+        <Image
+          src={banner}
+          alt={"banner"}
+          style={{ width: "100%", height: "auto" }}
+        />
+      </Box>
       <Card
         sx={{
           position: "absolute",
@@ -31,24 +38,32 @@ export const ReceptionHead: React.FC = () => {
           },
         }}
       >
-        <Typography variant="h7">New Arrival</Typography>
-        <Typography variant="h1" color="warning.main">
-          Discover Our <br />
-          New Collection
-        </Typography>
-        <Typography variant="h8">
-          Lorem ipsum dolor sit amet, consectetur adipiscing eilt. Utelit
-          tellus, luctus nec ullamcorper mattis.
-        </Typography>
-        <Button
+        <Box
           sx={{
-            padding: "25px 72px",
-            mt: "30px",
-            borderRadius: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
           }}
         >
-          BUY NOW
-        </Button>
+          <Typography variant="h7">New Arrival</Typography>
+          <Typography variant="h1" color="warning.main">
+            Discover Our <br />
+            New Collection
+          </Typography>
+          <Typography variant="h8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing eilt. Utelit
+            tellus, luctus nec ullamcorper mattis.
+          </Typography>
+          <Button
+            sx={{
+              padding: "25px 72px",
+              mt: "30px",
+              borderRadius: 0,
+            }}
+          >
+            BUY NOW
+          </Button>
+        </Box>
       </Card>
     </Box>
   );

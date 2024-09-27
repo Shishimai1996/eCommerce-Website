@@ -23,7 +23,7 @@ export const CategoryPictures: React.FC = () => {
 
       <Grid container spacing={2} justifyContent="center" sx={{ mt: "3%" }}>
         {category.map((item) => (
-          <Grid item xs={12} sm={3.5} key={item.label} textAlign="center">
+          <Grid item xs={9} sm={3.5} key={item.label} textAlign="center">
             <Image
               src={item.image}
               alt={item.label}

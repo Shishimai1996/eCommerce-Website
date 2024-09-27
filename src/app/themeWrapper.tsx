@@ -81,6 +81,22 @@ export default function ThemeWrapper({
           },
         },
       },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            fontSize: "14px",
+            lineHeight: "21px",
+          },
+        },
+      },
+      MuiInput: {
+        styleOverrides: {
+          root: {
+            fontSize: "14px",
+            fontWeight: 400,
+          },
+        },
+      },
     },
     palette: {
       primary: {
