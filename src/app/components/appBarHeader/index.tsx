@@ -1,25 +1,24 @@
 "use client";
 
-import React, { useState, MouseEvent } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 
+import { cartStore } from "@/store/shoppingStore";
 import {
   AppBar,
   Box,
   Button,
-  IconButton,
-  Menu,
-  MenuItem,
+  Divider,
+  Drawer,
   Toolbar,
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import bag from "@public/images/bag.png";
 import houseLogo from "@public/images/houseLogo.png";
+import { observer } from "mobx-react-lite";
 import Image from "next/image";
-import Link from "next/link";
-import MenuIcon from "@mui/icons-material/Menu";
-import { usePathname } from "next/navigation";
 import { ShoppingCartButton } from "../shoppingCartButton";
-import { fonts } from "@/styles/fonts/fonts";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const pages: {
   name: string;
@@ -28,32 +27,9 @@ export const pages: {
 
 export const settings = ["logout"];
 
-export const commonButtonStyles = {
-  my: 2,
-  display: "block",
-  textDecoration: "none",
-  transition: "background-color 0.3s",
-};
-
-export const activeButtonStyles = {
-  ...commonButtonStyles,
-  backgroundColor: "#FFFFFF",
-  color: "primary.contrast",
-  [`&:hover`]: {
-    backgroundColor: "#FFFFFF",
-  },
-};
-
-export const defaultButtonStyles = {
-  ...commonButtonStyles,
-  color: "primary.contrast",
-  [`&:hover`]: {
-    backgroundColor: "#FFFFFF",
-  },
-};
 const Title: React.FC<{ isMobile: boolean }> = ({ isMobile }) => (
   <>
-    <Image width={30} height={30} alt="logomark" src={houseLogo} />
+    <Image width={30} height={20} alt="logomark" src={houseLogo} />
     <Typography
       variant={isMobile ? "h4" : "h3"}
       noWrap
@@ -69,126 +45,175 @@ const Title: React.FC<{ isMobile: boolean }> = ({ isMobile }) => (
   </>
 );
 
-const DesktopView: React.FC<{
-  pathname: string;
-  handleCloseNavMenu: () => void;
-}> = ({ pathname, handleCloseNavMenu }) => {
-  console.log("pathname", pathname);
+const List: React.FC<{
+  handleShoppingCartClose: () => void;
+}> = ({ handleShoppingCartClose }) => {
+  const totalPrice = cartStore.cart.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
+
   return (
-    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-      {/* {pages.map((page) => (
+    <Box
+      sx={{
+        position: "fixed",
+        right: 0,
+        top: 0,
+        width: "30%",
+        height: "750px",
+        bgcolor: "secondary.main",
+        boxShadow: 3,
+        p: 2,
+        zIndex: 11,
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: "space-between", m: "5%" }}>
+        <Typography variant="h6" color="primary.main">
+          Shopping Cart
+        </Typography>
+
         <Button
-          key={`${page.name}_item`}
-          onClick={handleCloseNavMenu}
-          sx={
-            pathname.includes(page.path)
-              ? activeButtonStyles
-              : defaultButtonStyles
-          }
-          href={page.path}
+          sx={{ bgcolor: "transparent" }}
+          onClick={() => handleShoppingCartClose()}
         >
-          {page.name}
+          <Image src={bag} alt="bag" />
         </Button>
-      ))} */}
+      </Box>
+      <Divider />
+
+      {cartStore.cart.length ? (
+        <Box sx={{ m: "3%" }}>
+          <ul>
+            {cartStore.cart.map((item) => (
+              <li
+                key={item.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "10px",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Image
+                      src={item.image}
+                      alt={"image"}
+                      width={100}
+                      height={100}
+                      style={{ borderRadius: "5%" }}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="primary.main">
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" color="primary.main">
+                      {item.quantity} x{" "}
+                    </Typography>
+                    <Typography variant="h10" color="warning.main">
+                      {" "}
+                      Rs. {item.price}{" "}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <CancelIcon
+                      sx={{
+                        color: "primary.light",
+                        cursor: "pointer",
+                        ml: "auto",
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </li>
+            ))}
+          </ul>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="body2" color="primary.main">
+              Subtotal
+            </Typography>
+            <Typography variant="h7" color="warning.main">
+              Rs. {totalPrice}
+            </Typography>
+          </Box>
+        </Box>
+      ) : (
+        <Typography variant="body2" color="primary.main">
+          No Product
+        </Typography>
+      )}
     </Box>
   );
 };
 
-const MobileView: React.FC<{
-  handleOpenNavMenu: (event: MouseEvent<HTMLElement>) => void;
-  anchorElNav: HTMLElement | null;
-  handleCloseNavMenu: () => void;
-}> = ({ handleOpenNavMenu, anchorElNav, handleCloseNavMenu }) => {
-  return (
-    <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleOpenNavMenu}
-        color="inherit"
-        data-testid="navMenuButton"
-      >
-        <MenuIcon />
-      </IconButton>
-      <Menu
-        anchorEl={anchorElNav}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        open={Boolean(anchorElNav)}
-        onClose={handleCloseNavMenu}
-        sx={{
-          display: { xs: "block", md: "none" },
-        }}
-      >
-        {pages.map((page) => (
-          <MenuItem key={`${page.name}_item`} onClick={handleCloseNavMenu}>
-            <Link href={page.path}>
-              <Typography textAlign="center">{page.name}</Typography>
-            </Link>
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
-  );
-};
+export const AppBarHeader: React.FC = observer((): React.JSX.Element => {
+  const [openShoppingCart, setOpenShoppingCart] = useState<boolean>(false);
 
-export const AppBarHeader: React.FC = (): React.JSX.Element => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  useEffect(() => {
+    console.log("openShoppingCart updated: ", openShoppingCart);
+  }, [openShoppingCart]);
 
-  const pathname = usePathname();
-
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
-    setAnchorElNav(event.currentTarget);
+  const handleShoppingCartOpen = () => {
+    console.log("open!");
+    setOpenShoppingCart(true);
   };
 
-  const handleCloseNavMenu = (): void => {
-    setAnchorElNav(null);
+  const handleShoppingCartClose = () => {
+    console.log("close!");
+    setOpenShoppingCart(false);
   };
 
   const isMobile = useMediaQuery("(max-width:900px)");
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundColor: "#FFFFFF",
-      }}
-    >
-      <Box px={3} maxWidth="100%">
-        <Toolbar disableGutters>
-          {isMobile ? (
-            <>
-              {/* <MobileView
-                handleOpenNavMenu={handleOpenNavMenu}
-                anchorElNav={anchorElNav}
-                handleCloseNavMenu={handleCloseNavMenu}
-              /> */}
+    <>
+      {/* {openShoppingCart && ( */}
+      {/* <Box
+        sx={{
+          bgcolor: openShoppingCart ? "#00000061" : "transparent",
+          zIndex: 10,
+          position: "fixed",
+          top: 0,
+          right: 0,
+          width: "100%",
+          height: "100%",
+        }} */}
+      {/* // onClick={handleShoppingCartClose} */}
+      {/* > */}
+      {/* )} */}
 
-              <Title isMobile={isMobile} />
-            </>
-          ) : (
-            <>
-              <Title isMobile={isMobile} />
+      <AppBar
+        position="fixed"
+        sx={{
+          zIndex: 8,
+          backgroundColor: "#FFFFFF",
+        }}
+      >
+        <Box px={3} maxWidth="100%">
+          <Toolbar disableGutters>
+            <Title isMobile={isMobile} />
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
 
-              <DesktopView
-                pathname={pathname}
-                handleCloseNavMenu={handleCloseNavMenu}
-              />
-            </>
-          )}
-          <ShoppingCartButton />
-        </Toolbar>
-      </Box>
-    </AppBar>
+            <ShoppingCartButton
+              handleShoppingCartOpen={handleShoppingCartOpen}
+            />
+
+            {openShoppingCart && (
+              <Box sx={{ zIndex: 11 }}>
+                <List handleShoppingCartClose={handleShoppingCartClose} />
+              </Box>
+            )}
+          </Toolbar>
+        </Box>
+      </AppBar>
+      {/* </Box> */}
+    </>
   );
-};
+});

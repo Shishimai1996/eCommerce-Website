@@ -1,4 +1,5 @@
 export type TProduct = {
+  id: number;
   title: string;
   img: string;
   description: string;
@@ -9,6 +10,7 @@ export type TProduct = {
 
 export const productData: TProduct[] = [
   {
+    id: 1,
     title: "Syltherine",
     img: "/images/product1.png",
     description: "Stylish cafe chair",
@@ -17,6 +19,7 @@ export const productData: TProduct[] = [
     new: false,
   },
   {
+    id: 2,
     title: "Leviosa",
     img: "/images/product2.png",
     description: "Stylish cafe chair",
@@ -25,6 +28,7 @@ export const productData: TProduct[] = [
     new: false,
   },
   {
+    id: 3,
     title: "Lolito",
     img: "/images/product3.png",
     description: "Luxury big sofa",
@@ -33,6 +37,7 @@ export const productData: TProduct[] = [
     new: false,
   },
   {
+    id: 4,
     title: "Respira",
     img: "/images/product4.png",
     description: "Outdoor bar table and stool",
@@ -41,6 +46,7 @@ export const productData: TProduct[] = [
     new: true,
   },
   {
+    id: 5,
     title: "Grito",
     img: "/images/product5.png",
     description: "Night lamp",
@@ -49,6 +55,7 @@ export const productData: TProduct[] = [
     new: false,
   },
   {
+    id: 6,
     title: "Muggo",
     img: "/images/product6.png",
     description: "Small mug",
@@ -57,6 +64,7 @@ export const productData: TProduct[] = [
     new: true,
   },
   {
+    id: 7,
     title: "Pingky",
     img: "/images/product7.png",
     description: "Cute bed set",
@@ -65,6 +73,7 @@ export const productData: TProduct[] = [
     new: false,
   },
   {
+    id: 8,
     title: "Potty",
     img: "/images/product8.png",
     description: "Minimalist flower pot",
