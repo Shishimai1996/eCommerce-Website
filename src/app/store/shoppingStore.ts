@@ -20,10 +20,10 @@ class CartStore {
     const existingItem = this.cart.find((cartItem) => cartItem.id === item.id);
     runInAction(() => {
       if (existingItem) {
-        // 既存のアイテムがある場合は数量を増やす
+        // if there are previous item, increase quantity.
         existingItem.quantity += item.quantity;
       } else {
-        // 新しいアイテムをカートに追加
+        // add new item to the cart
         this.cart.push(item);
       }
     });
@@ -34,6 +34,17 @@ class CartStore {
       this.cart = this.cart.filter((item) => item.id !== id);
     });
   };
+
+  clearCart() {
+    this.cart = [];
+  }
+  get totalPrice() {
+    const total = this.cart.reduce(
+      (acc, item) => acc + item.quantity * item.price,
+      0
+    );
+    return new Intl.NumberFormat("ja-JP").format(total);
+  }
 }
 
 export const cartStore = new CartStore();

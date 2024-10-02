@@ -47,6 +47,12 @@ export const InstaPics: React.FC = () => {
       title: " 03 ---Bed Room",
       description: "natural color",
     },
+    {
+      img: instaPic3,
+      alt: "instaPic3",
+      title: " 03 ---Bed Room",
+      description: "natural color",
+    },
   ];
 
   return (
@@ -93,7 +99,7 @@ export const InstaPics: React.FC = () => {
                   style={{
                     objectFit: "contain",
                     width: "100%",
-                    height: "auto",
+                    height: "100%",
                   }}
                 />
                 <InstaPicCard
@@ -128,7 +134,7 @@ export const InstaPics: React.FC = () => {
                   style={{
                     objectFit: "contain",
                     width: "100%",
-                    height: "auto",
+                    height: "100%",
                   }}
                 />
                 <DotPagination activeStep={activeStep} pictures={pictures} />
@@ -151,7 +157,7 @@ export const InstaPics: React.FC = () => {
                 style={{
                   objectFit: "contain",
                   width: "100%",
-                  height: "auto",
+                  height: "100%",
                   marginTop: "24px",
                   marginLeft: "24px",
                   borderRadius: 0,

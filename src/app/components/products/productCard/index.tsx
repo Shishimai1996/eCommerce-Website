@@ -15,6 +15,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 interface BadComponentProps {
   badgeContent: string | null;
@@ -79,7 +80,8 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
       ? { badgeContent: "New", badgeColor: "success.main" }
       : null;
 
-    const handleAddCart = () => {
+    const handleAddCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
       cartStore.addToCart({
         id: product.id,
         title: product.title,
@@ -88,6 +90,11 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
         image: product.img,
       });
     };
+    const router = useRouter();
+    const openProductDetail = (product: TProduct) => {
+      router.push(`/${product.id}`);
+    };
+
     return (
       <Card
         sx={{
@@ -140,6 +147,7 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
             bgcolor: "rgba(0, 0, 0, 0.5)",
             zIndex: 7,
           }}
+          onClick={() => openProductDetail(product)}
         >
           <Button
             variant="contained"
@@ -149,7 +157,7 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
               color: "warning.main",
               borderRadius: 0,
             }}
-            onClick={() => handleAddCart()}
+            onClick={handleAddCart}
           >
             Add to cart
           </Button>
@@ -182,7 +190,7 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
             }}
           >
             <Typography sx={{ color: "text.secondary" }} variant="h6">
-              Rp {product.price}
+              Rp {new Intl.NumberFormat("ja-JP").format(product.price)}
             </Typography>
             {product.discount ? (
               <Typography
@@ -194,7 +202,10 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
                   fontSize: "20px",
                 }}
               >
-                Rp {(product.price / (1 - product.discount)).toFixed(0)}
+                Rp{" "}
+                {new Intl.NumberFormat("ja-JP").format(
+                  Math.round(product.price / (1 - product.discount))
+                )}
               </Typography>
             ) : null}
           </Box>

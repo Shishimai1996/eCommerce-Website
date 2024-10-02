@@ -6,6 +6,15 @@ export type TProduct = {
   price: number;
   discount: number;
   new: boolean;
+  sku: string;
+  category: string;
+  tags: string[];
+  size: string[];
+  color: string[];
+  star: number;
+  review: string[];
+  info: string;
+  room: string;
 };
 
 export const productData: TProduct[] = [
@@ -17,6 +26,15 @@ export const productData: TProduct[] = [
     price: 2500000,
     discount: 0.3,
     new: false,
+    sku: "ss001",
+    category: "combo",
+    tags: ["desk", "chair", "lamp"],
+    size: ["S", "M", "L"],
+    color: ["white"],
+    star: 3,
+    review: ["awesome", "nice"],
+    info: "This is set. but you can buy one of pieces.",
+    room: "dining",
   },
   {
     id: 2,
@@ -26,6 +44,15 @@ export const productData: TProduct[] = [
     price: 2500000,
     discount: 0,
     new: false,
+    sku: "ss002",
+    category: "chair",
+    tags: ["chair"],
+    size: ["S", "M", "L"],
+    color: ["white", "black"],
+    star: 2,
+    review: ["too small", "it's hard"],
+    info: "made by recycled plastic.",
+    room: "dining",
   },
   {
     id: 3,
@@ -35,6 +62,15 @@ export const productData: TProduct[] = [
     price: 7000000,
     discount: 0.5,
     new: false,
+    sku: "ss003",
+    category: "sofa",
+    tags: ["sofa"],
+    size: ["M", "L"],
+    color: ["gray", "brown"],
+    star: 4,
+    review: ["cosy sofa."],
+    info: "made by cotton",
+    room: "living",
   },
   {
     id: 4,
@@ -44,15 +80,33 @@ export const productData: TProduct[] = [
     price: 500000,
     discount: 0,
     new: true,
+    sku: "ss004",
+    category: "combo",
+    tags: ["sofa", "desk"],
+    size: ["L"],
+    color: ["gray", "white"],
+    star: 4,
+    review: ["nice functional raw table."],
+    info: "This is set. but you can buy one of pieces.",
+    room: "living",
   },
   {
     id: 5,
-    title: "Grito",
+    title: "Grifo",
     img: "/images/product5.png",
     description: "Night lamp",
     price: 1500000,
     discount: 0,
     new: false,
+    sku: "ss005",
+    category: "lamp",
+    tags: ["lamp"],
+    size: ["M"],
+    color: ["white"],
+    star: 5,
+    review: ["good light and using less electricity"],
+    info: "height: 150cm",
+    room: "living",
   },
   {
     id: 6,
@@ -62,6 +116,15 @@ export const productData: TProduct[] = [
     price: 150000,
     discount: 0,
     new: true,
+    sku: "ss006",
+    category: "combo",
+    tags: ["sofa", "desk"],
+    size: ["S", "M"],
+    color: ["gray", "black"],
+    star: 3,
+    review: ["good size and good sprint"],
+    info: "for two people",
+    room: "living",
   },
   {
     id: 7,
@@ -71,6 +134,15 @@ export const productData: TProduct[] = [
     price: 7000000,
     discount: 0.5,
     new: false,
+    sku: "ss007",
+    category: "combo",
+    tags: ["sofa", " desk"],
+    size: ["M", "L"],
+    color: ["Gray"],
+    star: 3,
+    review: ["fluffy sofa"],
+    info: "for two, three people",
+    room: "living",
   },
   {
     id: 8,
@@ -80,5 +152,14 @@ export const productData: TProduct[] = [
     price: 500000,
     discount: 0,
     new: true,
+    sku: "ss008",
+    category: "sofa",
+    tags: ["sofa"],
+    size: ["M"],
+    color: ["brown"],
+    star: 4,
+    review: ["good leather that is not broken easily"],
+    info: "leather material",
+    room: "living",
   },
 ];
