@@ -4,8 +4,7 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import checkoutHead from "@public/images/checkoutHead.png";
 import houseLogo from "@public/images/houseLogo.png";
-import { Breadcrumb } from "@/components/breadCrumbs";
-
+import { Breadcrumb } from "@/components/reusable/breadCrumbs";
 export const CheckoutHead = () => {
   return (
     <Box sx={{ position: "relative" }}>

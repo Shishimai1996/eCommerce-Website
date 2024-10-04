@@ -1,10 +1,9 @@
-import { Breadcrumb } from "@/components/breadCrumbs";
 import { ProductDescription } from "@/components/productDescription";
 import { ProductDetailMain } from "@/components/productDetailMain";
 import { RelatedProducts } from "@/components/relatedProducts";
 import { TProduct, productData } from "@/productData";
 import { Box } from "@mui/material";
-
+import { Breadcrumb } from "@/components/reusable/breadCrumbs";
 const ProductDetail: React.FC<{ params: TProduct }> = ({
   params,
 }): JSX.Element => {
