@@ -1,5 +1,4 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { StaticImageData } from "next/image";
 
 type CartItem = {
   id: number;
@@ -44,6 +43,11 @@ class CartStore {
       0
     );
     return new Intl.NumberFormat("ja-JP").format(total);
+  }
+
+  get totalQuantity() {
+    const total = this.cart.reduce((acc, item) => acc + item.quantity, 0);
+    return total;
   }
 }
 

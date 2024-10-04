@@ -1,19 +1,23 @@
 "use client";
 
-import { Button } from "@mui/material";
+import { cartStore } from "@/store/shoppingStore";
+import { Badge, Button } from "@mui/material";
 import shoppingCartButton from "@public/images/shoppingCart.png";
+import { observer } from "mobx-react-lite";
 import Image from "next/image";
 
 export const ShoppingCartButton: React.FC<{
   handleShoppingCartOpen: () => void;
-}> = ({ handleShoppingCartOpen }) => {
+}> = observer(({ handleShoppingCartOpen }) => {
   return (
-    <Button
-      sx={{ bgcolor: "secondary.main" }}
-      variant="text"
-      onClick={handleShoppingCartOpen}
-    >
-      <Image src={shoppingCartButton} alt={"shoppingCart"} />
-    </Button>
+    <Badge badgeContent={cartStore.totalQuantity} color="success">
+      <Button
+        sx={{ bgcolor: "secondary.main" }}
+        variant="text"
+        onClick={handleShoppingCartOpen}
+      >
+        <Image src={shoppingCartButton} alt={"shoppingCart"} />
+      </Button>
+    </Badge>
   );
-};
+});

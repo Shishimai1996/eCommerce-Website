@@ -87,19 +87,24 @@ export const InstaPics: React.FC = () => {
           </Button>
         </Box>
 
-        <Box sx={{ position: "relative", maxWidth: 1200, flexGrow: 1 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4.25}>
+        <Box sx={{ position: "relative", maxWidth: 2000, flexGrow: 1 }}>
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              alignItems: "flex-start",
+            }}
+          >
+            <Grid item xs={12} md={4}>
               <Box sx={{ position: "relative" }}>
                 <Image
                   src={pictures[activeStep].img}
                   alt={pictures[activeStep].alt}
                   width={400}
-                  height={800}
                   style={{
-                    objectFit: "contain",
+                    objectFit: "cover",
                     width: "100%",
-                    height: "100%",
+                    height: "auto",
                   }}
                 />
                 <InstaPicCard
@@ -116,6 +121,8 @@ export const InstaPics: React.FC = () => {
                 [theme.breakpoints.down("md")]: {
                   display: "none",
                 },
+                display: "flex",
+                alignItems: "flex-start",
               }}
             >
               <Box
@@ -124,43 +131,43 @@ export const InstaPics: React.FC = () => {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  position: "relative",
+                  height: "auto",
                 }}
               >
                 <Image
                   src={pictures[(activeStep + 1) % pictures.length].img}
                   alt={pictures[(activeStep + 1) % pictures.length].alt}
                   width={370}
-                  height={600}
                   style={{
                     objectFit: "contain",
                     width: "100%",
-                    height: "100%",
+                    height: "auto",
                   }}
                 />
                 <DotPagination activeStep={activeStep} pictures={pictures} />
               </Box>
             </Grid>
             <Grid
+              item
               xs={12}
-              md={3.75}
+              md={4}
               sx={{
                 [theme.breakpoints.down("md")]: {
                   display: "none",
                 },
+                display: "flex",
+                alignItems: "flex-start",
               }}
             >
               <Image
                 src={pictures[(activeStep + 2) % pictures.length].img}
                 alt={pictures[(activeStep + 2) % pictures.length].alt}
                 width={370}
-                height={500}
                 style={{
                   objectFit: "contain",
                   width: "100%",
-                  height: "100%",
-                  marginTop: "24px",
-                  marginLeft: "24px",
-                  borderRadius: 0,
+                  height: "auto",
                 }}
               />
             </Grid>

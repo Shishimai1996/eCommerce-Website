@@ -9,11 +9,13 @@ import bag from "@public/images/bag.png";
 import { observer } from "mobx-react-lite";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { CountableField } from "../reusable/countableField";
 
 export const ShoppingCart: React.FC<{
   handleShoppingCartClose: () => void;
 }> = observer(({ handleShoppingCartClose }) => {
   const router = useRouter();
+
   const handleCheckoutPage = () => {
     router.push(`/checkout`);
     handleShoppingCartClose();
@@ -90,9 +92,13 @@ export const ShoppingCart: React.FC<{
                   >
                     {item.title}
                   </Typography>
-                  <Typography variant="body2" color="primary.main">
-                    {item.quantity} x{" "}
-                  </Typography>
+                  <CountableField
+                    itemId={item.id}
+                    title={item.title}
+                    price={item.price}
+                    image={item.image}
+                  />
+
                   <Typography
                     variant="h10"
                     color="warning.main"

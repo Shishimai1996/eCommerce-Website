@@ -12,7 +12,7 @@ export const CheckoutHead = () => {
       <Image
         src={checkoutHead}
         alt={"checkoutHead"}
-        style={{ zIndex: 1, width: "100%", objectFit: "contain" }}
+        style={{ zIndex: 1, width: "100%" }}
       />
       <Box
         position="absolute"

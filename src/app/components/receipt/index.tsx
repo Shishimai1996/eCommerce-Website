@@ -1,7 +1,16 @@
 "use client";
 
 import { cartStore } from "@/store/shoppingStore";
-import { Box, Button, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import { observer } from "mobx-react-lite";
 
 export const Receipt = observer(() => {
@@ -81,20 +90,39 @@ export const Receipt = observer(() => {
         </Typography>
       </Box>
       <Divider />
-      <Typography variant="body2" color="primary.main">
-        ● Direct Bank Transfer
-      </Typography>
-      <Typography variant="body2" color="primary.light">
-        Make your payment directly into our bank account. Please use your Order
-        ID as the payment reference. Your order will not be shipped until the
-        funds have cleared in our account.
-      </Typography>
-      <Typography variant="h9" color="primary.dark">
-        ◯ Direct Bank Transfer
-      </Typography>
-      <Typography variant="h9" color="primary.dark">
-        ◯ Cash On Delivery
-      </Typography>
+
+      <FormControl>
+        <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue="DirectBankTransfer"
+          name="radio-buttons-group"
+        >
+          <FormControlLabel
+            value="DirectBankTransfer"
+            control={<Radio />}
+            label="Direct Bank Transfer"
+            sx={{ color: "primary.main" }}
+          />
+          <Typography variant="body2" color="primary.light">
+            Make your payment directly into our bank account. Please use your
+            Order ID as the payment reference. Your order will not be shipped
+            until the funds have cleared in our account.
+          </Typography>
+          <FormControlLabel
+            value="creditcardTransfer"
+            control={<Radio />}
+            label="Credit card Transfer"
+            sx={{ color: "primary.main" }}
+          />
+          <FormControlLabel
+            value="CashOnDelivery"
+            control={<Radio />}
+            label="Cash On Delivery"
+            sx={{ color: "primary.main" }}
+          />
+        </RadioGroup>
+      </FormControl>
+
       <Typography variant="h7" color="primary.main">
         Your personal data will be used to support your experience throughout
         this website, to manage access to your account, and for other purposes

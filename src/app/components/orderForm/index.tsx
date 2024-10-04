@@ -5,9 +5,7 @@ import { useState } from "react";
 import { TCountry, countries } from "@/countryData";
 
 export const OrderForm = () => {
-  const [selectedCountry, setSelectedCountry] = useState<TCountry>(
-    countries[0]
-  );
+  const [selectedCountry, setSelectedCountry] = useState<TCountry | null>(null);
   const [selectedProvince, setSelectedProvince] = useState("");
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const countrySelect = countries.find(
@@ -18,7 +16,20 @@ export const OrderForm = () => {
       setSelectedProvince("");
     }
   };
+  const [firstName, setFirstName] = useState("");
+  const [firstNameError, setFirstNameError] = useState(false);
 
+  const handleChangeFirstName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = event?.target.value;
+    setFirstName(value);
+    if (value.trim() === "") {
+      setFirstNameError(true);
+    } else {
+      setFirstNameError(false);
+    }
+  };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3, m: "10%" }}>
       <Typography color="primary.main" variant="h3">
@@ -27,7 +38,14 @@ export const OrderForm = () => {
       <Box sx={{ display: "flex", gap: 1 }}>
         <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
           <Typography color="primary.main">First Name</Typography>
-          <TextField variant="outlined" required />
+          <TextField
+            variant="outlined"
+            required
+            error={firstNameError}
+            onChange={handleChangeFirstName}
+            value={firstName}
+            helperText={firstNameError ? "First name is required." : ""}
+          />
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
           <Typography color="primary.main">Last Name</Typography>
@@ -43,15 +61,18 @@ export const OrderForm = () => {
         <TextField
           id="outlined-select-currency"
           select
-          defaultValue={selectedCountry}
+          value={selectedCountry ? selectedCountry.countryName : ""}
           onChange={handleCountryChange}
-          //   helperText="Please select your currency"
         >
-          {countries.map((country) => (
-            <MenuItem key={country.countryName} value={country.countryName}>
-              {country.countryName}
-            </MenuItem>
-          ))}
+          {countries.length > 0 ? (
+            countries.map((country) => (
+              <MenuItem key={country.countryName} value={country.countryName}>
+                {country.countryName}
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem disabled>No countries available</MenuItem>
+          )}
         </TextField>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -67,15 +88,28 @@ export const OrderForm = () => {
         <TextField
           id="outlined-select-currency"
           select
-          defaultValue={selectedProvince}
           onChange={(e) => setSelectedProvince(e.target.value)}
-          //   helperText="Please select your currency"
+          disabled={!selectedCountry}
+          value={selectedProvince || ""}
+          helperText={
+            !selectedCountry
+              ? "Please select your country."
+              : selectedCountry.province.length === 0
+              ? "No provinces available for the selected country"
+              : ""
+          }
         >
-          {selectedCountry.province.map((prov) => (
-            <MenuItem key={prov} value={prov}>
-              {prov}
+          {selectedCountry && selectedCountry.province.length > 0 ? (
+            selectedCountry.province.map((prov) => (
+              <MenuItem key={prov} value={prov}>
+                {prov}
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem disabled>
+              {selectedCountry ? "No provinces available" : "Select a country"}
             </MenuItem>
-          ))}
+          )}
         </TextField>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
