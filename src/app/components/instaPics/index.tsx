@@ -95,84 +95,57 @@ export const InstaPics: React.FC = () => {
               alignItems: "flex-start",
             }}
           >
-            <Grid item xs={12} md={4}>
-              <Box sx={{ position: "relative" }}>
-                <Image
-                  src={pictures[activeStep].img}
-                  alt={pictures[activeStep].alt}
-                  width={400}
-                  style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: "auto",
+            {pictures
+              .slice(activeStep, activeStep + 3)
+              .concat(
+                pictures.slice(0, Math.max(0, activeStep + 3 - pictures.length))
+              )
+              .map((item, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  md={4}
+                  key={index}
+                  sx={{
+                    [theme.breakpoints.down("md")]: {
+                      display: index === 0 ? "block" : "none",
+                    },
                   }}
-                />
-                <InstaPicCard
-                  pictures={pictures[activeStep]}
-                  handleNext={handleNext}
-                />
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              sx={{
-                [theme.breakpoints.down("md")]: {
-                  display: "none",
-                },
-                display: "flex",
-                alignItems: "flex-start",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  position: "relative",
-                  height: "auto",
-                }}
-              >
-                <Image
-                  src={pictures[(activeStep + 1) % pictures.length].img}
-                  alt={pictures[(activeStep + 1) % pictures.length].alt}
-                  width={370}
-                  style={{
-                    objectFit: "contain",
-                    width: "100%",
-                    height: "auto",
-                  }}
-                />
-                <DotPagination activeStep={activeStep} pictures={pictures} />
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              sx={{
-                [theme.breakpoints.down("md")]: {
-                  display: "none",
-                },
-                display: "flex",
-                alignItems: "flex-start",
-              }}
-            >
-              <Image
-                src={pictures[(activeStep + 2) % pictures.length].img}
-                alt={pictures[(activeStep + 2) % pictures.length].alt}
-                width={370}
-                style={{
-                  objectFit: "contain",
-                  width: "100%",
-                  height: "auto",
-                }}
-              />
-            </Grid>
+                >
+                  <Box
+                    sx={{
+                      height: index === 0 ? "600px" : "500px",
+                      overflow: "hidden", //avoid picture go outside the frame
+                    }}
+                  >
+                    <Image
+                      src={item.img}
+                      alt={item.alt}
+                      width={400}
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </Box>
+                </Grid>
+              ))}
           </Grid>
-
+          <InstaPicCard
+            pictures={pictures[activeStep]}
+            handleNext={handleNext}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              top: "90%",
+              right: "50%",
+              transform: "translateY(-50%)",
+            }}
+          >
+            <DotPagination activeStep={activeStep} pictures={pictures} />
+          </Box>
           <Button
             size="medium"
             onClick={handleNext}

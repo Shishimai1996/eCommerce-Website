@@ -27,7 +27,7 @@ class CartStore {
       }
     });
   };
-
+  //if id matches item id inside of cart, remove it and leave items which is not matched.
   removeFromCart = (id: number) => {
     runInAction(() => {
       this.cart = this.cart.filter((item) => item.id !== id);
@@ -37,6 +37,7 @@ class CartStore {
   clearCart() {
     this.cart = [];
   }
+
   get totalPrice() {
     const total = this.cart.reduce(
       (acc, item) => acc + item.quantity * item.price,
