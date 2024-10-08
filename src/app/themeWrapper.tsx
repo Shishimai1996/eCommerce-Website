@@ -11,7 +11,7 @@ export default function ThemeWrapper({
 }) {
   const theme = createTheme({
     typography: {
-      fontFamily: "Poppins",
+      fontFamily: "'Poppins', sans-serif",
       h1: {
         fontWeight: "700",
         fontSize: "52px",
@@ -69,7 +69,7 @@ export default function ThemeWrapper({
       MuiButton: {
         styleOverrides: {
           root: {
-            fontFamily: "Poppins",
+            fontFamily: "'Poppins', sans-serif",
             fontSize: "16px",
             backgroundColor: "#B88E2F",
             color: "#ffffff",

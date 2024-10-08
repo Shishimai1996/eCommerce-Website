@@ -98,7 +98,8 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
     return (
       <Card
         sx={{
-          maxWidth: 345,
+          maxWidth: "285px",
+          maxHeight: "446px",
           borderRadius: 0,
           position: "relative",
           overflow: "visible",
@@ -189,7 +190,13 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
               alignItems: "center",
             }}
           >
-            <Typography sx={{ color: "text.secondary" }} variant="h6">
+            <Typography
+              sx={{
+                color: "text.secondary",
+                fontSize: "20px",
+                fontWeight: 600,
+              }}
+            >
               Rp {new Intl.NumberFormat("ja-JP").format(product.price)}
             </Typography>
             {product.discount ? (
@@ -198,8 +205,6 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
                 color="warning.dark"
                 sx={{
                   textDecoration: "line-through",
-
-                  fontSize: "20px",
                 }}
               >
                 Rp{" "}

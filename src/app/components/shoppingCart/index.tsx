@@ -10,12 +10,13 @@ import { observer } from "mobx-react-lite";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CountableField } from "../reusable/countableField";
+import { useTheme } from "@mui/material/styles";
 
 export const ShoppingCart: React.FC<{
   handleShoppingCartClose: () => void;
 }> = observer(({ handleShoppingCartClose }) => {
   const router = useRouter();
-
+  const theme = useTheme();
   const handleCheckoutPage = () => {
     router.push(`/checkout`);
     handleShoppingCartClose();
@@ -45,6 +46,9 @@ export const ShoppingCart: React.FC<{
           boxShadow: 3,
           p: 2,
           zIndex: 11,
+          [theme.breakpoints.down("md")]: {
+            width: "95%",
+          },
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -84,29 +88,49 @@ export const ShoppingCart: React.FC<{
                     height={100}
                     style={{ borderRadius: "5%" }}
                   />
-
-                  <Typography
-                    variant="body2"
-                    color="primary.main"
-                    sx={{ ml: "3%" }}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      minWidth: 230,
+                      gap: 1,
+                      ml: "5%",
+                    }}
                   >
-                    {item.title}
-                  </Typography>
-                  <CountableField
-                    itemId={item.id}
-                    title={item.title}
-                    price={item.price}
-                    image={item.image}
-                  />
+                    <Typography
+                      variant="body2"
+                      color="primary.main"
+                      sx={{ ml: "3%" }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: 1,
+                      }}
+                    >
+                      <CountableField
+                        itemId={item.id}
+                        title={item.title}
+                        price={item.price}
+                        image={item.image}
+                      />
+                      <Typography
+                        variant="h10"
+                        color="primary.main"
+                        sx={{ ml: "3%" }}
+                      >
+                        x
+                      </Typography>
+                      <Typography variant="h10" color="warning.main">
+                        Rs. {new Intl.NumberFormat("ja-JP").format(item.price)}
+                      </Typography>
+                    </Box>
+                  </Box>
 
-                  <Typography
-                    variant="h10"
-                    color="warning.main"
-                    sx={{ ml: "3%" }}
-                  >
-                    {" "}
-                    Rs. {new Intl.NumberFormat("ja-JP").format(item.price)}{" "}
-                  </Typography>
                   <Button
                     sx={{
                       bgcolor: " transparent",

@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useRouter } from "next/navigation";
 import { TProduct } from "@/productData";
+import { Box } from "@mui/material";
 
 export const Breadcrumb: React.FC<{ product?: TProduct; pathname: string }> = ({
   product,
@@ -43,9 +44,6 @@ export const Breadcrumb: React.FC<{ product?: TProduct; pathname: string }> = ({
       >
         {breadcrumbs}
       </Breadcrumbs>
-
-      {/* <Typography sx={{ color: "primary.light" }}>|</Typography> */}
-      <Typography sx={{ color: "text.primary" }}>{product?.title}</Typography>
     </Stack>
   );
 };

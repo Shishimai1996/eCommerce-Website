@@ -32,25 +32,25 @@ export const InstaPics: React.FC = () => {
     {
       img: instaPic1,
       alt: "instaPic1",
-      title: " 01 ---Bed Room",
+      title: " 01 ー Bed Room",
       description: " Inner Peace",
     },
     {
       img: instaPic2,
       alt: "instaPic2",
-      title: " 02 ---Dining Room",
+      title: " 02 ー Dining Room",
       description: "Wooden style",
     },
     {
       img: instaPic3,
       alt: "instaPic3",
-      title: " 03 ---Bed Room",
+      title: " 03 ー Bed Room",
       description: "natural color",
     },
     {
       img: instaPic3,
       alt: "instaPic3",
-      title: " 03 ---Bed Room",
+      title: " 03 ー Bed Room",
       description: "natural color",
     },
   ];
