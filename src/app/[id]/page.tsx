@@ -1,14 +1,29 @@
 import { ProductDescription } from "@/components/productDescription";
 import { ProductDetailMain } from "@/components/productDetailMain";
 import { RelatedProducts } from "@/components/relatedProducts";
-import { TProduct, productData } from "@/productData";
+import { productData } from "@/productData";
 import { Box, Typography } from "@mui/material";
 import { Breadcrumb } from "@/components/reusable/breadCrumbs";
-const ProductDetail: React.FC<{ params: TProduct }> = ({
+
+type ProductDetailProps = {
+  params: { id: string };
+};
+
+const ProductDetail: React.FC<ProductDetailProps> = ({
   params,
 }): JSX.Element => {
   const { id } = params;
-  const productContent = productData[id - 1];
+  const productContent = productData.find(
+    (product) => product.id === Number(id)
+  );
+
+  if (!productContent) {
+    return (
+      <Typography variant="h6" color="error">
+        Product not found.
+      </Typography>
+    );
+  }
 
   return (
     <Box
@@ -35,3 +50,18 @@ const ProductDetail: React.FC<{ params: TProduct }> = ({
 };
 
 export default ProductDetail;
+
+export async function generateStaticParams() {
+  const ids = productData.map((product) => ({ id: product.id.toString() }));
+  return ids;
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const product = productData.find((p) => p.id === Number(params.id));
+  return {
+    title: product ? product.title : "Product not found",
+    description: product
+      ? product.description
+      : "No product information available",
+  };
+}
