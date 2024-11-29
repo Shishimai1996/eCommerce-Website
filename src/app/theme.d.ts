@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   TypographyVariants,
   TypographyVariantsOptions,
 } from "@mui/material/styles";
-
+/* eslint-enable @typescript-eslint/no-unused-vars */
 declare module "@mui/material/styles" {
   interface TypographyVariants {
     h7: React.CSSProperties;

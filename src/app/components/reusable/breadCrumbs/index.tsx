@@ -8,10 +8,8 @@ import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useRouter } from "next/navigation";
 import { TProduct } from "@/productData";
-import { Box } from "@mui/material";
 
 export const Breadcrumb: React.FC<{ product?: TProduct; pathname: string }> = ({
-  product,
   pathname,
 }) => {
   const router = useRouter();
