@@ -21,7 +21,7 @@ export const productData: TProduct[] = [
   {
     id: 1,
     title: "Syltherine",
-    img: "/images/product1.png",
+    img: "@public/images/product1.png",
     description: "Stylish cafe chair",
     price: 2500000,
     discount: 0.3,
