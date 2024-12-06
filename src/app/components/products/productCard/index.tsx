@@ -12,7 +12,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
