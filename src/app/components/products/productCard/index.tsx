@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface BadComponentProps {
   badgeContent: string | null;
@@ -112,22 +113,34 @@ export const ProductCard: React.FC<{ product: TProduct }> = observer(
               badgeContent={badge.badgeContent}
               badgeColor={badge.badgeColor}
             >
-              <CardMedia
+              <Image
+                src={product.img}
+                alt={"product"}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                title={product.title}
+              />
+              {/* <CardMedia
                 component="img"
                 image={product.img}
                 alt="product"
                 sx={{ width: "100%", height: "100%", objectFit: "cover" }}
                 title={product.title}
-              />
+              /> */}
             </BadgeComponent>
           ) : (
-            <CardMedia
-              component="img"
-              image={product.img}
-              alt="product"
-              sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+            <Image
+              src={product.img}
+              alt={"product"}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
               title={product.title}
             />
+            // <CardMedia
+            //   component="img"
+            //   image={product.img}
+            //   alt="product"
+            //   sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+            //   title={product.title}
+            // />
           )}
         </Box>
 

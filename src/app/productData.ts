@@ -1,7 +1,18 @@
+import product1 from "@public/images/product1.png";
+import product2 from "@public/images/product2.png";
+import product3 from "@public/images/product3.png";
+import product4 from "@public/images/product4.png";
+import product5 from "@public/images/product5.png";
+import product6 from "@public/images/product6.png";
+import product7 from "@public/images/product7.png";
+import product8 from "@public/images/product8.png";
+
+import { StaticImageData } from "next/image";
+
 export type TProduct = {
   id: number;
   title: string;
-  img: string;
+  img: StaticImageData;
   description: string;
   price: number;
   discount: number;
@@ -21,7 +32,7 @@ export const productData: TProduct[] = [
   {
     id: 1,
     title: "Syltherine",
-    img: "@public/images/product1.png",
+    img: product1,
     description: "Stylish cafe chair",
     price: 2500000,
     discount: 0.3,
@@ -39,7 +50,7 @@ export const productData: TProduct[] = [
   {
     id: 2,
     title: "Leviosa",
-    img: "/images/product2.png",
+    img: product2,
     description: "Stylish cafe chair",
     price: 2500000,
     discount: 0,
@@ -57,7 +68,7 @@ export const productData: TProduct[] = [
   {
     id: 3,
     title: "Lolito",
-    img: "/images/product3.png",
+    img: product3,
     description: "Luxury big sofa",
     price: 7000000,
     discount: 0.5,
@@ -75,7 +86,7 @@ export const productData: TProduct[] = [
   {
     id: 4,
     title: "Respira",
-    img: "/images/product4.png",
+    img: product4,
     description: "Outdoor bar table and stool",
     price: 500000,
     discount: 0,
@@ -93,7 +104,7 @@ export const productData: TProduct[] = [
   {
     id: 5,
     title: "Grifo",
-    img: "/images/product5.png",
+    img: product5,
     description: "Night lamp",
     price: 1500000,
     discount: 0,
@@ -111,7 +122,7 @@ export const productData: TProduct[] = [
   {
     id: 6,
     title: "Muggo",
-    img: "/images/product6.png",
+    img: product6,
     description: "Small mug",
     price: 150000,
     discount: 0,
@@ -129,7 +140,7 @@ export const productData: TProduct[] = [
   {
     id: 7,
     title: "Pingky",
-    img: "/images/product7.png",
+    img: product7,
     description: "Cute bed set",
     price: 7000000,
     discount: 0.5,
@@ -147,7 +158,7 @@ export const productData: TProduct[] = [
   {
     id: 8,
     title: "Potty",
-    img: "/images/product8.png",
+    img: product8,
     description: "Minimalist flower pot",
     price: 500000,
     discount: 0,

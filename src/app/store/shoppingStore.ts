@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import { StaticImageData } from "next/image";
 
 type CartItem = {
   id: number;
   title: string;
   price: number;
   quantity: number;
-  image: string;
+  image: StaticImageData;
 };
 
 class CartStore {
