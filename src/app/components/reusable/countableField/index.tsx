@@ -3,13 +3,14 @@
 import { cartStore } from "@/store/shoppingStore";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { observer } from "mobx-react-lite";
+import { StaticImageData } from "next/image";
 import * as React from "react";
 
 export const CountableField: React.FC<{
   itemId: number;
   title: string;
   price: number;
-  image: string;
+  image: StaticImageData;
 }> = observer(({ itemId, title, price, image }) => {
   const item = cartStore.cart.find((cartItem) => cartItem.id === itemId); //find cart item if the id is matched between passed item and cart item.
 
